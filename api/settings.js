@@ -2,41 +2,108 @@
 NEXTEL V2 SETTINGS API
 ===================================== */
 
+import fs from "fs";
+import path from "path";
+
 export default function handler(req, res) {
 
-  // Allow requests from your frontend
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  /* =========================
+  CORS
+  ========================= */
+
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "*"
+  );
+
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, OPTIONS"
+  );
+
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Content-Type"
+  );
+
+  /* =========================
+  OPTIONS
+  ========================= */
 
   if (req.method === "OPTIONS") {
+
     return res.status(200).end();
+
   }
 
-  if (req.method === "GET") {
+  /* =========================
+  ONLY GET
+  ========================= */
 
-    return res.status(200).json({
+  if (req.method !== "GET") {
 
-      account1: {
-        bankName: "Kuda MFB",
-        accountNumber: "2022355704",
-        accountName: "NEXTEL CONNECT"
-      },
-
-      account2: {
-        bankName: "Bank Name",
-        accountNumber: "0000000000",
-        accountName: "NEXTEL CONNECT"
-      },
-
-      redirectUrl: "https://google.com"
-
+    return res.status(405).json({
+      error: "Method not allowed"
     });
 
   }
 
-  return res.status(405).json({
-    error: "Method not allowed"
-  });
+  try {
+
+    /* =========================
+    PAYMENT JSON FILE
+    ========================= */
+
+    const filePath = path.join(
+      process.cwd(),
+      "data",
+      "payment.json"
+    );
+
+    /* =========================
+    READ PAYMENT SETTINGS
+    ========================= */
+
+    const fileContent =
+      fs.readFileSync(
+        filePath,
+        "utf8"
+      );
+
+    const data =
+      JSON.parse(fileContent);
+
+    /* =========================
+    PREVENT BROWSER CACHE
+    ========================= */
+
+    res.setHeader(
+      "Cache-Control",
+      "no-store, no-cache, must-revalidate"
+    );
+
+    /* =========================
+    RETURN PAYMENT SETTINGS
+    ========================= */
+
+    return res.status(200).json(data);
+
+  } catch (error) {
+
+    console.error(
+      "Settings API Error:",
+      error
+    );
+
+    return res.status(500).json({
+
+      success: false,
+
+      error:
+        "Could not load payment settings"
+
+    });
+
+  }
 
 }
