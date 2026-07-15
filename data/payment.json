@@ -1,13 +1,13 @@
 {
   "account1": {
-    "bankName": "Moniepoint MFB",
-    "accountNumber": "88888888888",
-    "accountName": "NEXTEL CONNECT MONIEPOINT"
+    "bankName": "Palmpay",
+    "accountNumber": "08114320838",
+    "accountName": "Musa Esther"
   },
   "account2": {
-    "bankName": "MONIEPOINT LTF",
-    "accountNumber": "0000000000",
-    "accountName": "NEXTEL CONNECT LTD"
+    "bankName": "Kuda",
+    "accountNumber": "2078284939",
+    "accountName": "Musa Esther"
   },
-  "redirectUrl": "https://t.me"
+  "redirectUrl": "https://t.me/verified_agent002"
 }
