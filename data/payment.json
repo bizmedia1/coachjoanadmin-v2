@@ -1,13 +1,13 @@
 {
   "account1": {
-    "bankName": "Kuda MFB",
-    "accountNumber": "2022355704",
-    "accountName": "NEXTEL CONNECT"
+    "bankName": "Moniepoint MFB",
+    "accountNumber": "88888888888",
+    "accountName": "NEXTEL CONNECT MONIEPOINT"
   },
   "account2": {
-    "bankName": "Bank Name",
+    "bankName": "MONIEPOINT LTF",
     "accountNumber": "0000000000",
-    "accountName": "NEXTEL CONNECT"
+    "accountName": "NEXTEL CONNECT LTD"
   },
-  "redirectUrl": "https://google.com"
+  "redirectUrl": "https://t.me"
 }
